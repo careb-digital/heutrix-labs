@@ -52,18 +52,23 @@ export default function Navbar() {
             <a className="font-headline-md text-headline-md font-bold text-primary tracking-tight" href="#">Heutrix Labs</a>
           </div>
           <nav className="hidden md:flex items-center gap-lg">
-            {['home', 'services', 'about', 'FAQ'].map((id) => (
+            {[
+              { id: 'home', label: 'Home' },
+              { id: 'services', label: 'Services' },
+              { id: 'about', label: 'About' },
+              { id: 'faq', label: 'FAQ' },
+            ].map((item) => (
               <a
-                key={id}
+                key={item.id}
                 className={`font-label-md text-label-md transition-colors ${
-                  activeSection === id || (activeSection === 'problem' && id === 'home') || (activeSection === 'checklist' && id === 'faq')
+                  activeSection === item.id || (activeSection === 'problem' && item.id === 'home') || (activeSection === 'checklist' && item.id === 'faq')
                     ? 'text-secondary border-b-2 border-secondary pb-1'
                     : 'text-on-surface-variant hover:text-secondary'
                 }`}
-                href={`#${id}`}
-                onClick={(e) => scrollToSection(e, id)}
+                href={`#${item.id}`}
+                onClick={(e) => scrollToSection(e, item.id)}
               >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
+                {item.label}
               </a>
             ))}
             <a className="bg-primary text-on-primary px-lg py-sm rounded-xl font-label-md text-label-md hover:opacity-90 transition-all shadow-sm" href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Book a Free Fit Call</a>
