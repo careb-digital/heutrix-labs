@@ -521,11 +521,53 @@ function HomePage() {
         </div>
       </Section>
 
-      <CtaSection
-        title="Ready to make one workflow easier to manage?"
-        body="Start with a free fit call. We will discuss what is happening now, whether Heutrix Labs is the right fit, and what a sensible next step could look like."
-      />
+      <HomeFitCallSection />
     </>
+  );
+}
+
+function HomeFitCallSection() {
+  const fitCallTopics = [
+    'The workflow or operational issue that is hardest to manage now',
+    'Where follow-up, visibility, handover or reporting is breaking down',
+    'Whether a diagnostic, sprint, dashboard or Safe AI setup is the right next step'
+  ];
+
+  return (
+    <Section id="book-fit-call" className="bg-surface">
+      <div className="grid gap-xxl lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
+          <motion.p variants={fadeUp} className="mb-sm font-label-md text-label-md uppercase text-secondary">
+            Next step
+          </motion.p>
+          <motion.h2 variants={fadeUp} className="mb-md font-display-lg text-display-lg-mobile text-primary md:text-display-lg">
+            Book a free fit call.
+          </motion.h2>
+          <motion.p variants={fadeUp} className="mb-lg font-body-lg text-body-lg text-on-surface-variant">
+            We will discuss the workflow or operational issue, what is currently difficult to manage and whether
+            Heutrix Labs is the right fit to help. The purpose of this call is to decide the best next step.
+          </motion.p>
+
+          <motion.div variants={fadeUp} className="mb-lg rounded-xl border border-secondary/20 bg-secondary-container/30 p-lg">
+            <p className="mb-xs font-label-md text-label-md text-primary">Privacy note before submitting</p>
+            <p className="font-body-sm text-body-sm text-on-surface-variant">
+              Please do not include patient names, Medicare numbers, clinical details, diagnosis information,
+              participant records or other sensitive information in this form. A general description of the workflow is
+              enough for the fit call.
+            </p>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="rounded-xl border border-outline-variant bg-white p-lg shadow-sm">
+            <h3 className="mb-md font-headline-sm text-headline-sm text-primary">What we can cover</h3>
+            <BulletList items={fitCallTopics} />
+          </motion.div>
+        </motion.div>
+
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.12 }}>
+          <ContactForm search="" submitLabel="Request fit call" />
+        </motion.div>
+      </div>
+    </Section>
   );
 }
 
@@ -1056,7 +1098,7 @@ function ContactPage({ search }) {
   );
 }
 
-function ContactForm({ search }) {
+function ContactForm({ search, submitLabel = 'Send enquiry' }) {
   const [submitted, setSubmitted] = useState(false);
   const defaultHelp = useMemo(() => {
     const params = new URLSearchParams(search);
@@ -1164,7 +1206,7 @@ function ContactForm({ search }) {
         type="submit"
         className="mt-lg inline-flex w-full items-center justify-center gap-sm rounded-xl bg-primary px-lg py-md font-headline-sm text-[18px] leading-6 text-on-primary shadow-md transition-opacity hover:opacity-95"
       >
-        Send enquiry
+        {submitLabel}
         <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
           send
         </span>
