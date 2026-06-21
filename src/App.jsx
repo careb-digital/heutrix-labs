@@ -415,6 +415,8 @@ function HomePage() {
         </motion.div>
       </Section>
 
+      <DiagnosticMethodSection />
+
       <Section className="bg-surface-container-low">
         <div className="grid gap-xl lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <SectionIntro title="What Heutrix Labs does">
@@ -524,6 +526,89 @@ function HomePage() {
         body="Start with a free fit call. We will discuss what is happening now, whether Heutrix Labs is the right fit, and what a sensible next step could look like."
       />
     </>
+  );
+}
+
+function DiagnosticMethodSection() {
+  const methodSteps = [
+    ['1', 'Diagnostic', 'Finding the workflow gaps'],
+    ['2', 'Process', 'Uncovering manual steps and handover points'],
+    ['3', 'Automation', 'Reducing repeated admin where it is sensible'],
+    ['4', 'Safe AI', 'Setting practical rules with human review']
+  ];
+
+  const practiceTypes = ['GP', 'AH', 'SP'];
+
+  return (
+    <Section className="bg-surface-container-low overflow-hidden">
+      <div className="grid gap-xxl lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
+          <motion.p variants={fadeUp} className="mb-sm font-label-md text-label-md uppercase text-secondary">
+            Workflow first
+          </motion.p>
+          <motion.h2 variants={fadeUp} className="mb-md font-display-lg text-display-lg-mobile text-primary md:text-display-lg">
+            We diagnose before we build.
+          </motion.h2>
+          <motion.p variants={fadeUp} className="mb-lg font-body-lg text-body-lg text-on-surface-variant">
+            Good operational improvement starts with understanding the workflow. Before recommending a system,
+            dashboard, automation or AI-supported workflow, we look at what triggers the process, who is involved, where
+            work gets stuck, and what risks need to be controlled. Then we recommend the simplest useful solution.
+          </motion.p>
+
+          <motion.div variants={fadeUp} className="mb-xl rounded-xl border border-error/20 bg-error-container/55 p-lg text-on-error-container">
+            <div className="flex items-start gap-md">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 text-error">
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  warning
+                </span>
+              </div>
+              <div>
+                <p className="mb-xs font-label-md text-label-md font-bold">Clear service boundaries</p>
+                <p className="font-body-sm text-body-sm">
+                  Heutrix Labs provides workflow improvement, safe AI support, practice visibility builds and
+                  operational systems. We do <strong>NOT</strong> provide clinical advice, medical advice, legal advice,
+                  financial advice, regulatory advice, official audit services, NDIS registration readiness, or
+                  compliance gap assessments.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="flex flex-col gap-md sm:flex-row sm:items-center">
+            <div className="flex -space-x-3" aria-hidden="true">
+              {practiceTypes.map((label) => (
+                <span
+                  key={label}
+                  className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white bg-primary font-label-md text-label-md text-on-primary shadow-sm"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+            <span className="font-label-md text-label-md text-on-surface-variant">Trusted by Australian Practices</span>
+          </motion.div>
+        </motion.div>
+
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
+          <div className="glass-card rounded-xl border border-outline-variant bg-white/90 p-xl shadow-xl">
+            <h3 className="mb-lg font-headline-sm text-headline-sm text-primary">The Heutrix Method</h3>
+            <div className="space-y-md">
+              {methodSteps.map(([number, title, copy]) => (
+                <div key={title} className="grid grid-cols-[auto_1fr] gap-md rounded-lg border border-outline-variant bg-surface-container-lowest p-md">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container font-label-md text-label-md text-on-secondary-container">
+                    {number}
+                  </div>
+                  <div>
+                    <p className="font-headline-sm text-headline-sm text-primary">{title}</p>
+                    <p className="font-body-md text-body-md text-on-surface-variant">{copy}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </Section>
   );
 }
 
