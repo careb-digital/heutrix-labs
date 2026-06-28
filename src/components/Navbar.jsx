@@ -137,10 +137,10 @@ export default function Navbar({ currentPath = '/' }) {
           </a>
           <a
             className="block rounded-xl bg-secondary-fixed-dim p-md text-center font-label-md text-on-secondary-fixed"
-            href={ctas.checklist.href}
+            href={ctas.pricing.href}
             onClick={() => setDrawerOpen(false)}
           >
-            Download the workflow checklist
+            {ctas.pricing.label}
           </a>
         </div>
       </aside>

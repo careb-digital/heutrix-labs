@@ -18,14 +18,14 @@ export const routes = [
     label: 'Allied Health',
     seoTitle: 'Workflow Systems for Allied Health Practices | Heutrix Labs',
     metaDescription:
-      'Heutrix Labs helps Australian allied health practices improve admin workflows, referral tracking, onboarding, dashboards, reporting preparation and safe AI use.'
+      'Heutrix Labs helps Australian allied health practices improve intake, referral tracking, document collection, reporting preparation, handovers, dashboards and safe AI use.'
   },
   {
     path: '/disability-providers',
     label: 'Disability Providers',
     seoTitle: 'Workflow Systems for Disability Support Providers | Heutrix Labs',
     metaDescription:
-      'Heutrix Labs helps Australian disability support providers improve internal workflows, evidence tracking, incident and complaint registers, onboarding, dashboards and safe AI use.'
+      'Heutrix Labs helps Australian disability support providers improve intake tracking, evidence tracking, incident and complaint registers, staff onboarding, dashboards, reporting preparation and safe AI use.'
   },
   {
     path: '/pricing',
@@ -109,8 +109,9 @@ function routeMapSafe(path) {
 
 export const ctas = {
   fitCall: { label: 'Book a free fit call', href: '/contact' },
-  checklist: { label: 'Download the workflow checklist', href: '/contact?next=workflow-checklist' },
-  services: { label: 'View services', href: '/services' },
+  services: { label: 'View Services', href: '/services' },
+  allServices: { label: 'View all services', href: '/services' },
+  pricing: { label: 'View pricing', href: '/pricing' },
   diagnostic: { label: 'Start with a Workflow Diagnostic', href: '/contact?service=workflow-diagnostic' },
   workflow: { label: 'Improve a workflow', href: '/contact?service=workflow-automation-sprint' },
   dashboard: { label: 'Build an operations dashboard', href: '/contact?service=operations-dashboard-build' },
@@ -159,40 +160,24 @@ export const homeServices = [
     icon: 'troubleshoot',
     lead: 'Find the workflow worth improving first.',
     description:
-      'A structured review for organisations that know something is taking too much time, creating risk or causing avoidable friction, but are not yet sure what should change first.',
-    cta: ctas.diagnostic
+      'A structured review for organisations that know admin is messy, risky or time-consuming, but are not yet sure what should change first.',
+    cta: { label: 'Learn more', href: '/services#workflow-diagnostic' }
   },
   {
     title: 'Workflow Automation Sprint',
     icon: 'auto_mode',
     lead: 'Improve one important admin or operational workflow.',
     description:
-      'A focused sprint to improve a defined workflow such as intake tracking, referral follow-up, document collection, onboarding, reporting preparation or evidence tracking.',
-    cta: ctas.workflow
+      'A focused sprint to improve one defined workflow such as intake tracking, referral follow-up, service agreements, document collection, incident and complaint tracking, onboarding, reporting preparation or evidence tracking.',
+    cta: { label: 'Learn more', href: '/services#workflow-automation-sprint' }
   },
   {
     title: 'Operations Dashboard Build',
     icon: 'visibility',
     lead: 'See what needs attention without chasing updates.',
     description:
-      'A practical dashboard or visibility view for practice managers, provider owners and operational leads who need to see workload, status, overdue items, bottlenecks and follow-up actions.',
-    cta: ctas.dashboard
-  },
-  {
-    title: 'Safe AI Setup',
-    icon: 'verified_user',
-    lead: 'Set clear rules before AI becomes part of everyday admin work.',
-    description:
-      'A practical setup for organisations that want to use AI carefully for internal admin, drafting, reporting support, workflow guidance or productivity.',
-    cta: ctas.ai
-  },
-  {
-    title: 'Tailored Internal Workflow System',
-    icon: 'dashboard_customize',
-    lead: 'Create a practical internal system around a workflow that has outgrown spreadsheets.',
-    description:
-      'For organisations that need a more structured internal tool, workflow layer, tracker, register, dashboard or approval process around existing operations.',
-    cta: ctas.tailored
+      'A practical dashboard or visibility view for practice managers, provider owners and operational leads who need to see workload, status, overdue items, bottlenecks, incidents, complaints, evidence or reporting inputs.',
+    cta: { label: 'Learn more', href: '/services#operations-dashboard-build' }
   }
 ];
 
@@ -555,81 +540,146 @@ export const services = [
 ];
 
 export const alliedHealthContent = {
-  title: 'Practical workflow systems for allied health practices.',
+  title: 'Workflow systems for allied health practices that have outgrown scattered admin.',
   intro: [
     'Heutrix Labs helps allied health practices improve the admin and operational workflows that sit around client care.',
     'We support practice managers, owners and operational leads with clearer workflows, practical trackers, dashboards, automations, handover systems and safe AI rules.'
   ],
+  audienceTitle: 'Who this is for',
+  audienceIntro:
+    'This page is for allied health practices that need better visibility and consistency across everyday operations without replacing their core practice management software.',
+  audienceItems: [
+    'Psychology practices',
+    'Physiotherapy practices',
+    'Occupational therapy practices',
+    'Speech pathology practices',
+    'Dietetics and other allied health practices',
+    'Multidisciplinary clinics',
+    'Practice managers and owners managing growth, admin pressure or reporting workload'
+  ],
   problemsTitle: 'Common allied health workflow problems',
   problemsLead: 'You may be dealing with:',
   problems: [
-    'Referral follow-up spread across inboxes and spreadsheets',
-    'Intake steps handled differently by different staff',
+    'Intake and enquiry follow-up handled differently by different staff',
+    'Referral tracking spread across inboxes, spreadsheets and practice notes',
     'Appointment or document follow-up that depends on memory',
-    'Reports, letters or admin tasks that are hard to track',
-    'Onboarding steps that are inconsistent or person-dependent',
-    'Managers lacking visibility over work in progress',
-    'Staff using AI tools without clear privacy or review rules'
+    'Reports, letters or admin tasks that are hard to track from request to completion',
+    'Clinician and admin handovers that are inconsistent or person-dependent',
+    'Staff onboarding steps that are not documented clearly',
+    'Managers lacking visibility over work in progress, overdue items or bottlenecks',
+    'Reporting preparation taking too long because information is scattered',
+    'Staff using AI tools without clear privacy, suitability or review rules'
   ],
-  improvementsTitle: 'Practical improvements may include',
+  improvementsTitle: 'Workflows we can help improve',
+  improvementsLead: 'Practical improvements may include:',
   improvements: [
-    'Referral trackers',
     'Intake workflow improvements',
+    'Referral trackers',
+    'Enquiry follow-up workflows',
     'Document collection workflows',
-    'Onboarding checklists',
-    'Reporting preparation workflows',
-    'Operations dashboards',
+    'Report and letter tracking workflows',
+    'Review or recall follow-up workflows, where relevant',
+    'Staff onboarding checklists',
+    'Clinician and admin handover guides',
     'Admin task registers',
-    'Safe AI rules for internal admin use',
-    'Handover guides and staff instructions'
+    'Practice manager dashboards',
+    'Reporting preparation workflows',
+    'Safe AI rules for internal admin, drafting and workflow support'
   ],
-  exampleTitle: 'Example allied health project',
-  exampleBefore: 'Referral follow-up depends on inbox searches, staff memory and a shared spreadsheet that is not always updated.',
-  exampleAfter: 'The practice has a referral tracker showing status, owner, next action, due date and overdue items.',
+  examplesTitle: 'Example allied health projects',
+  examples: [
+    {
+      title: 'Referral tracking',
+      before: 'Referral follow-up depends on inbox searches, staff memory and a shared spreadsheet that is not always updated.',
+      after: 'The practice has a referral tracker showing status, owner, next action, due date and overdue items.'
+    },
+    {
+      title: 'Reporting preparation',
+      before: 'Reports and letters are hard to monitor because requests, drafts, reviews and follow-up actions are spread across different places.',
+      after: 'The practice has a clearer reporting workflow showing status, owner, review steps and follow-up actions.'
+    },
+    {
+      title: 'Staff onboarding',
+      before: 'New starter tasks depend on memory and repeated reminders.',
+      after: 'The practice has a structured onboarding checklist with task ownership, due dates and handover notes.'
+    }
+  ],
   startingPoints: ['Workflow Diagnostic', 'Workflow Automation Sprint', 'Operations Dashboard Build', 'Safe AI Setup'],
+  startingNote:
+    'If the problem is clear but the best fix is not, start with a Workflow Diagnostic. If the workflow is already well-defined, Heutrix Labs can move straight into a scoped sprint, dashboard build or Safe AI setup.',
   boundary:
     'Heutrix Labs provides workflow, automation, dashboard and safe AI support. It does not provide clinical advice, legal advice or regulatory approval.',
   finalTitle: 'Make one allied health workflow easier to manage.'
 };
 
 export const disabilityContent = {
-  title: 'Practical workflow systems for disability support providers.',
+  title: 'Workflow systems for disability support providers managing admin, evidence and handovers.',
   intro: [
     'Heutrix Labs helps disability support providers improve the internal systems that support service delivery, admin visibility and safer information handling.',
     'We focus on operational workflow support, including trackers, registers, dashboards, handover systems, reporting preparation workflows and safe AI rules.'
+  ],
+  audienceTitle: 'Who this is for',
+  audienceIntro:
+    'This page is for disability support providers that need clearer operational workflows without positioning the work as NDIS registration readiness, audit support or regulatory advice.',
+  audienceItems: [
+    'Small-to-mid-sized disability support providers',
+    'Provider owners managing growth or admin risk',
+    'Operations managers and team leaders',
+    'Providers relying on spreadsheets, folders and inboxes to track important work',
+    'Teams needing clearer evidence, incident, complaint, onboarding or handover workflows'
   ],
   problemsTitle: 'Common disability provider workflow problems',
   problemsLead: 'You may be dealing with:',
   problems: [
     'Intake and enquiry follow-up spread across emails and spreadsheets',
-    'Service agreement or document collection steps that are hard to track',
+    'Service agreement workflows that are difficult to track end to end',
+    'Participant document collection steps that depend on memory or repeated reminders',
     'Incident, complaint, risk or evidence records stored inconsistently',
-    'Staff onboarding and role changes managed through memory',
-    'Handovers that depend too heavily on one person',
-    'Reporting preparation that takes too long',
+    'Staff onboarding and role changes managed through informal checklists',
+    'Shift, task or handover visibility depending too heavily on one person',
+    'Reporting preparation taking too long because information is scattered',
     'Managers lacking visibility over what is waiting, overdue or unresolved',
     'AI tools being used without clear privacy, suitability or review rules'
   ],
-  improvementsTitle: 'Practical improvements may include',
+  improvementsTitle: 'Workflows we can help improve',
+  improvementsLead: 'Practical improvements may include:',
   improvements: [
     'Intake trackers',
     'Service agreement workflow trackers',
-    'Document collection workflows',
+    'Participant document collection workflows',
     'Incident registers',
     'Complaint registers',
     'Risk registers',
     'Evidence tracking tools',
     'Staff onboarding workflows',
     'Internal task registers',
+    'Shift, task or handover visibility views',
     'Operational dashboards',
     'Reporting preparation workflows',
     'Safe AI rules for internal admin use'
   ],
-  exampleTitle: 'Example disability provider project',
-  exampleBefore:
-    'Incident and complaint follow-up is spread across forms, folders and spreadsheets, making it hard to see what is open, overdue or unresolved.',
-  exampleAfter:
-    'The provider has a structured register showing status, owner, review steps, due dates and follow-up actions.',
+  examplesTitle: 'Example disability provider projects',
+  examples: [
+    {
+      title: 'Incident and complaint tracking',
+      before:
+        'Incident and complaint follow-up is spread across forms, folders and spreadsheets, making it hard to see what is open, overdue or unresolved.',
+      after:
+        'The provider has a structured register showing status, owner, review steps, due dates and follow-up actions.'
+    },
+    {
+      title: 'Evidence tracking',
+      before:
+        'Evidence is collected across folders, emails and spreadsheets, making it hard to know what is current, missing or ready for review.',
+      after:
+        'The provider has an evidence tracker showing category, owner, location, review status and next action.'
+    },
+    {
+      title: 'Staff onboarding',
+      before: 'Onboarding tasks vary by manager and are tracked through memory, messages or copied checklists.',
+      after: 'The provider has a clearer onboarding workflow with required steps, owners, due dates and handover notes.'
+    }
+  ],
   startingPoints: [
     'Workflow Diagnostic',
     'Workflow Automation Sprint',
@@ -637,6 +687,8 @@ export const disabilityContent = {
     'Tailored Internal Workflow System',
     'Safe AI Setup'
   ],
+  startingNote:
+    'If the problem is clear but the best fix is not, start with a Workflow Diagnostic. If the workflow is already well-defined, Heutrix Labs can move straight into a scoped sprint, dashboard build, tailored workflow system or Safe AI setup.',
   boundary:
     'Heutrix Labs supports operational workflow systems. It does not provide NDIS registration readiness, mock audits, official audit certification, legal advice, clinical advice or regulatory approval. Any compliance-related workflow, register or dashboard should support the provider responsibilities but does not remove the provider obligation to review, approve and maintain its own processes.',
   finalTitle: 'Make one disability support workflow easier to manage.'

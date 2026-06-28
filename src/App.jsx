@@ -369,8 +369,8 @@ function HomePage() {
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col gap-md sm:flex-row sm:flex-wrap">
               <ButtonLink href={ctas.fitCall.href}>{ctas.fitCall.label}</ButtonLink>
-              <ButtonLink href={ctas.checklist.href} variant="secondary" icon="download">
-                {ctas.checklist.label}
+              <ButtonLink href={ctas.services.href} variant="secondary" icon={null}>
+                {ctas.services.label}
               </ButtonLink>
             </motion.div>
             <motion.p variants={fadeUp} className="mt-md max-w-2xl font-body-sm text-body-sm text-on-surface-variant">
@@ -413,12 +413,25 @@ function HomePage() {
       </Section>
 
       <Section id="home-services" className="bg-surface">
-        <SectionIntro title="Practical ways we can help." className="mx-auto mb-xl text-center" />
+        <SectionIntro title="Practical ways we can help." className="mx-auto mb-xl text-center">
+          <p>
+            Start with one of the clearest entry points. These services are designed to help allied health practices
+            and disability support providers understand what to improve, fix one defined workflow, or see operational
+            work more clearly.
+          </p>
+        </SectionIntro>
         <motion.div className="grid gap-lg md:grid-cols-2 xl:grid-cols-3" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.08 }}>
           {homeServices.map((service) => (
             <ServiceSummaryCard key={service.title} service={service} />
           ))}
         </motion.div>
+        <motion.p variants={fadeUp} className="mx-auto mt-xl max-w-3xl text-center font-body-lg text-body-lg text-on-surface-variant">
+          Need Safe AI Setup or a tailored internal workflow system?{' '}
+          <a href={ctas.allServices.href} className="font-headline-sm text-primary underline decoration-secondary underline-offset-4">
+            {ctas.allServices.label}
+          </a>
+          .
+        </motion.p>
       </Section>
 
       <DiagnosticMethodSection />
@@ -520,8 +533,8 @@ function HomePage() {
         <div className="grid gap-lg lg:grid-cols-2">
           <InfoCard icon="lock" title="Privacy-aware by design">
             <p>
-              Heutrix Labs does not recommend copying patient, participant, health, clinical, Medicare, diagnostic or
-              NDIS or other sensitive information into AI tools unless there is a documented, privacy-reviewed and
+              Heutrix Labs does not recommend copying patient, participant, client, health, clinical, Medicare, NDIS,
+              diagnostic or other sensitive information into AI tools unless there is a documented, privacy-reviewed and
               approved process.
             </p>
           </InfoCard>
@@ -752,6 +765,11 @@ function ServicesPage() {
           We focus on practical implementation: clearer workflows, less duplicated admin, better visibility, safer AI
           use and more reliable handover.
         </p>
+        <p>
+          Most clients start with a Workflow Diagnostic when the problem is clear but the best fix is not. If the
+          workflow is already well-defined, Heutrix Labs can move straight into a scoped sprint, dashboard build or Safe
+          AI setup.
+        </p>
       </PageHero>
 
       <Section className="bg-surface-container-low">
@@ -771,6 +789,10 @@ function ServicesPage() {
   );
 }
 
+function serviceAnchor(title) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
 function AudiencePage({ content }) {
   return (
     <>
@@ -779,6 +801,19 @@ function AudiencePage({ content }) {
           <p key={paragraph}>{paragraph}</p>
         ))}
       </PageHero>
+
+      {content.audienceItems ? (
+        <Section>
+          <div className="grid gap-xl lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <SectionIntro title={content.audienceTitle}>
+              <p>{content.audienceIntro}</p>
+            </SectionIntro>
+            <div className="rounded-xl border border-outline-variant bg-white p-lg shadow-sm">
+              <BulletList items={content.audienceItems} columns />
+            </div>
+          </div>
+        </Section>
+      ) : null}
 
       <Section className="bg-surface-container-low">
         <div className="grid gap-xl lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
@@ -794,10 +829,7 @@ function AudiencePage({ content }) {
       <Section>
         <div className="grid gap-xl lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionIntro title={content.improvementsTitle}>
-            <p>
-              Heutrix Labs focuses on practical workflow support that can be used in day-to-day operations and handed
-              over clearly.
-            </p>
+            <p>{content.improvementsLead || 'Heutrix Labs focuses on practical workflow support that can be used in day-to-day operations and handed over clearly.'}</p>
           </SectionIntro>
           <div className="rounded-xl border border-outline-variant bg-white p-lg shadow-sm">
             <BulletList items={content.improvements} columns />
@@ -806,17 +838,23 @@ function AudiencePage({ content }) {
       </Section>
 
       <Section className="bg-surface-container-low">
+        <SectionIntro title={content.examplesTitle || content.exampleTitle} className="mb-xl" />
         <div className="grid gap-lg lg:grid-cols-3">
-          <InfoCard icon="sync_alt" title={content.exampleTitle} className="lg:col-span-2">
-            <p className="mb-sm">
-              <strong className="text-primary">Before:</strong> {content.exampleBefore}
-            </p>
-            <p>
-              <strong className="text-primary">After:</strong> {content.exampleAfter}
-            </p>
-          </InfoCard>
+          {(content.examples || [
+            { title: content.exampleTitle, before: content.exampleBefore, after: content.exampleAfter }
+          ]).map((example) => (
+            <InfoCard key={example.title} icon="sync_alt" title={example.title}>
+              <p className="mb-sm">
+                <strong className="text-primary">Before:</strong> {example.before}
+              </p>
+              <p>
+                <strong className="text-primary">After:</strong> {example.after}
+              </p>
+            </InfoCard>
+          ))}
           <InfoCard icon="start" title="Suitable starting points">
             <BulletList items={content.startingPoints} />
+            {content.startingNote ? <p className="mt-md">{content.startingNote}</p> : null}
           </InfoCard>
         </div>
       </Section>
@@ -835,6 +873,7 @@ function AudiencePage({ content }) {
 function DetailedService({ service }) {
   return (
     <motion.article
+      id={serviceAnchor(service.title)}
       variants={fadeUp}
       initial="hidden"
       whileInView="show"
@@ -1188,9 +1227,7 @@ function ContactForm({ search, submitLabel = 'Send enquiry' }) {
     if (service === 'regulated-provider-workflow-tools') return 'Regulated Provider Workflow Tools';
     return 'Not sure yet';
   }, [search]);
-  const defaultNext = new URLSearchParams(search).get('next') === 'workflow-checklist'
-    ? 'Download the workflow checklist'
-    : 'Book a free fit call';
+  const defaultNext = 'Book a free fit call';
 
   if (submitted) {
     return (
@@ -1254,7 +1291,8 @@ function ContactForm({ search, submitLabel = 'Send enquiry' }) {
           defaultValue={defaultNext}
           options={[
             'Book a free fit call',
-            'Download the workflow checklist',
+            'View Services',
+            'View pricing',
             'Start with a Workflow Diagnostic',
             'Improve a workflow',
             'Build an operations dashboard',
@@ -1504,8 +1542,8 @@ function CtaSection({ title, body, cta = ctas.fitCall }) {
           <ButtonLink href={cta.href} variant="mint">
             {cta.label}
           </ButtonLink>
-          <ButtonLink href={ctas.checklist.href} variant="secondary" icon="download">
-            {ctas.checklist.label}
+          <ButtonLink href={ctas.pricing.href} variant="secondary" icon={null}>
+            {ctas.pricing.label}
           </ButtonLink>
         </motion.div>
       </motion.div>
