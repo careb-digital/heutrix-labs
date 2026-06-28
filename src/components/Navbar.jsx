@@ -4,6 +4,8 @@ import { ctas, mainNav } from '../siteContent';
 const navIcons = {
   '/': 'home',
   '/services': 'settings',
+  '/allied-health': 'medical_services',
+  '/disability-providers': 'diversity_3',
   '/pricing': 'payments',
   '/safe-ai': 'verified_user',
   '/about': 'info',
@@ -40,7 +42,7 @@ export default function Navbar({ currentPath = '/' }) {
           <div className="flex items-center gap-md">
             <button
               type="button"
-              className="rounded-lg p-sm text-primary md:hidden"
+              className="rounded-lg p-sm text-primary lg:hidden"
               onClick={() => setDrawerOpen(true)}
               aria-label="Open navigation"
             >
@@ -53,7 +55,7 @@ export default function Navbar({ currentPath = '/' }) {
             </a>
           </div>
 
-          <nav className="hidden items-center gap-lg md:flex" aria-label="Main navigation">
+          <nav className="hidden items-center gap-md lg:flex xl:gap-lg" aria-label="Main navigation">
             {mainNav.map((item) => {
               const active = item.path === currentPath;
               return (
@@ -70,7 +72,7 @@ export default function Navbar({ currentPath = '/' }) {
               );
             })}
             <a
-              className="rounded-xl bg-primary px-lg py-sm font-label-md text-label-md text-on-primary shadow-sm transition-opacity hover:opacity-95"
+              className="whitespace-nowrap rounded-xl bg-primary px-md py-sm font-label-md text-label-md text-on-primary shadow-sm transition-opacity hover:opacity-95 lg:px-lg"
               href={ctas.fitCall.href}
             >
               Book a Free Fit Call

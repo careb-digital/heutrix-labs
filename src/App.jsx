@@ -5,11 +5,13 @@ import Footer from './components/Footer';
 import {
   aiGuidanceRows,
   approachSteps,
+  alliedHealthContent,
   beforeAfterExamples,
   beliefs,
   bestFit,
   capabilities,
   ctas,
+  disabilityContent,
   faqs,
   homePainPoints,
   homeServices,
@@ -26,7 +28,8 @@ import {
   services,
   suitableAiUses,
   typicalProjects,
-  unsuitableAiUses
+  unsuitableAiUses,
+  whoWeHelp
 } from './siteContent';
 
 const routeMap = new Map(routes.map((route) => [route.path, route]));
@@ -138,6 +141,10 @@ function PageRenderer({ path, search }) {
   switch (path) {
     case '/services':
       return <ServicesPage />;
+    case '/allied-health':
+      return <AudiencePage content={alliedHealthContent} />;
+    case '/disability-providers':
+      return <AudiencePage content={disabilityContent} />;
     case '/pricing':
       return <PricingPage />;
     case '/safe-ai':
@@ -257,8 +264,8 @@ function BoundaryCard() {
       </div>
       <p className="mb-sm font-headline-sm text-headline-sm text-primary">Practical implementation partner</p>
       <p className="font-body-sm text-body-sm text-on-surface-variant">
-        Workflow, automation, dashboard and safe AI support for internal operations. Legal, clinical, audit and
-        regulatory responsibilities remain with the client.
+        Workflow, automation, dashboard and safe AI support for internal operations. Legal, clinical, audit,
+        registration and regulatory responsibilities remain with the client.
       </p>
     </aside>
   );
@@ -322,7 +329,7 @@ function ResponsiveRows({ columns, rows, emphasisLast = false }) {
         >
           {row.map((cell, index) => (
             <div key={`${cell}-${index}`} className={columns[index].align === 'right' ? 'md:text-right' : ''}>
-              <p className="mb-xs font-label-sm text-label-sm uppercase text-outline md:hidden">{columns[index].label}</p>
+              <p className="mb-xs font-label-sm text-label-sm uppercase text-on-surface-variant md:hidden">{columns[index].label}</p>
               <p
                 className={
                   index === 0 || (emphasisLast && index === row.length - 1)
@@ -347,28 +354,28 @@ function HomePage() {
         <div className="mx-auto grid max-w-container-max gap-xl lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <motion.div className="max-w-3xl" variants={stagger} initial="hidden" animate="show">
             <motion.p variants={fadeUp} className="mb-md inline-flex max-w-full whitespace-normal rounded-[999px] border border-secondary/20 bg-secondary-container px-md py-xs font-label-sm text-label-sm uppercase text-on-secondary-container">
-              Workflow systems for Australian health practices
+              Workflow systems for care-related service providers
             </motion.p>
             <motion.h1 variants={fadeUp} className="mb-md break-words font-display-lg text-display-lg-mobile text-primary md:text-display-lg">
-              Clearer workflows for Australian health practices.
+              Practical workflow systems for allied health practices and disability support providers.
             </motion.h1>
             <motion.p variants={fadeUp} className="mb-md font-body-lg text-body-lg text-on-surface-variant">
-              Heutrix Labs helps GP clinics, allied health practices and specialist providers clean up messy admin,
-              scattered spreadsheets, manual follow-up and unsafe AI use.
+              Heutrix Labs helps Australian care-related service providers clean up messy admin, scattered
+              spreadsheets, manual follow-up, reporting gaps and unsafe AI use.
             </motion.p>
             <motion.p variants={fadeUp} className="mb-lg font-body-lg text-body-lg text-on-surface-variant">
               We map how the work actually happens, then build practical improvements such as workflow trackers,
-              dashboards, automations, handover systems and safe AI rules.
+              dashboards, automations, handover systems, evidence registers and safe AI rules.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col gap-md sm:flex-row sm:flex-wrap">
               <ButtonLink href={ctas.fitCall.href}>{ctas.fitCall.label}</ButtonLink>
-              <ButtonLink href={ctas.services.href} variant="secondary" icon={null}>
-                {ctas.services.label}
+              <ButtonLink href={ctas.checklist.href} variant="secondary" icon="download">
+                {ctas.checklist.label}
               </ButtonLink>
             </motion.div>
             <motion.p variants={fadeUp} className="mt-md max-w-2xl font-body-sm text-body-sm text-on-surface-variant">
-              For practice owners and managers who need clearer workflows, better visibility and safer use of
-              technology without disrupting patient care.
+              For practice managers, provider owners and operational leads who need clearer workflows, better
+              visibility and safer use of technology without disrupting service delivery.
             </motion.p>
           </motion.div>
           <motion.div variants={fadeUp} initial="hidden" animate="show" transition={{ delay: 0.22 }}>
@@ -379,17 +386,16 @@ function HomePage() {
 
       <Section id="workflow-pressure" className="bg-primary text-on-primary">
         <SectionIntro
-          title="When important work is spread across memory, inboxes and spreadsheets, even capable teams can lose visibility."
+          title="Does this sound familiar?"
           className="mb-xl"
           inverse
         >
           <p>
-            Many practice teams are highly capable, but the systems around them have not always kept up with growth,
-            staff changes, patient demand or disconnected tools. Heutrix Labs helps identify where important admin and
-            operational work needs clearer ownership, tracking, reminders, handover or review.
+            Even capable teams lose visibility when important work is spread across memory, inboxes, spreadsheets and
+            manual reminders.
           </p>
         </SectionIntro>
-        <h3 className="mb-lg font-headline-md text-headline-md text-secondary-fixed">You may notice:</h3>
+        <h3 className="mb-lg font-headline-md text-headline-md text-secondary-fixed">You may be dealing with:</h3>
         <motion.div className="grid gap-md md:grid-cols-2 lg:grid-cols-3" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.12 }}>
           {homePainPoints.map((item) => (
             <motion.div key={item} variants={fadeUp} className="rounded-xl border border-white/15 bg-white/10 p-lg shadow-sm backdrop-blur-sm">
@@ -421,8 +427,9 @@ function HomePage() {
         <div className="grid gap-xl lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <SectionIntro title="What Heutrix Labs does">
             <p>
-              Heutrix Labs helps health practices improve the internal systems that sit around patient care. We are not
-              here to replace your practice management software or add unnecessary complexity.
+              Heutrix Labs helps care-related service providers improve the internal systems that sit around client
+              care and service delivery. We are not here to replace your core practice, client or case management
+              software.
             </p>
           </SectionIntro>
           <div className="rounded-xl border border-outline-variant bg-white p-lg shadow-sm">
@@ -433,27 +440,33 @@ function HomePage() {
 
       <Section className="bg-surface">
         <div className="grid gap-xl lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <SectionIntro title="Make your practice easier to run without compromising patient trust.">
+          <SectionIntro title="Make your organisation easier to run without compromising trust.">
             <p>
-              A health practice does not need technology for its own sake. It needs systems that support the people
-              already doing the work.
+              Allied health practices and disability support providers do not need technology for its own sake. They
+              need systems that support the people already doing the work.
             </p>
             <p>
-              As practices grow, the operational work around patient care can become harder to coordinate. Enquiries
-              need follow-up. Referrals need tracking. Staff need clear handovers. Managers need to know what is
-              happening without chasing updates. Sensitive information needs to be handled carefully.
+              As services grow, the operational work around client care and service delivery can become harder to
+              coordinate. Enquiries need follow-up. Referrals need tracking. Documents need to be collected. Staff need
+              clear handovers. Managers need to know what is happening without chasing updates.
             </p>
             <p>
-              Heutrix Labs starts by understanding how your practice actually works, then recommends practical
+              Heutrix Labs starts by understanding how your work actually happens, then recommends practical
               improvements that are safe, maintainable and useful in daily operations.
             </p>
           </SectionIntro>
-          <InfoCard icon="health_and_safety" title="Privacy-aware by design">
-            <p>
-              Health practices handle sensitive information. Any workflow, dashboard, automation or AI setup needs to
-              consider privacy, confidentiality, access controls and minimum necessary data use from the start.
-            </p>
-          </InfoCard>
+          <div className="space-y-lg">
+            <InfoCard icon="groups" title="Who we help">
+              <BulletList items={whoWeHelp} />
+            </InfoCard>
+            <InfoCard icon="health_and_safety" title="Privacy-aware by design">
+              <p>
+                Allied health practices and disability support providers handle sensitive information. Any workflow,
+                dashboard, automation or AI setup needs to consider privacy, confidentiality, access controls and
+                minimum necessary data use from the start.
+              </p>
+            </InfoCard>
+          </div>
         </div>
       </Section>
 
@@ -461,7 +474,7 @@ function HomePage() {
         <div className="grid gap-xl lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <SectionIntro title="Which service is right for you?">
             <p>
-              Most practices start with either a free fit call or a Workflow Diagnostic. If the workflow is already
+              Most organisations start with either a free fit call or a Workflow Diagnostic. If the workflow is already
               clear, we can move straight to a scoped build.
             </p>
           </SectionIntro>
@@ -508,14 +521,15 @@ function HomePage() {
           <InfoCard icon="lock" title="Privacy-aware by design">
             <p>
               Heutrix Labs does not recommend copying patient, participant, health, clinical, Medicare, diagnostic or
-              other sensitive information into AI tools unless there is a documented, privacy-reviewed and approved
-              process.
+              NDIS or other sensitive information into AI tools unless there is a documented, privacy-reviewed and
+              approved process.
             </p>
           </InfoCard>
           <InfoCard icon="rule" title="Important boundary">
             <p>
               Heutrix Labs provides workflow, automation, dashboard and safe AI support. It does not provide official
-              audit certification, legal advice, clinical advice or regulatory approval.
+              audit certification, legal advice, clinical advice, NDIS registration readiness, mock audits or
+              regulatory approval.
             </p>
           </InfoCard>
         </div>
@@ -551,9 +565,8 @@ function HomeFitCallSection() {
           <motion.div variants={fadeUp} className="mb-lg rounded-xl border border-secondary/20 bg-secondary-container/30 p-lg">
             <p className="mb-xs font-label-md text-label-md text-primary">Privacy note before submitting</p>
             <p className="font-body-sm text-body-sm text-on-surface-variant">
-              Please do not include patient names, Medicare numbers, clinical details, diagnosis information,
-              participant records or other sensitive information in this form. A general description of the workflow is
-              enough for the fit call.
+              Please do not include patient, participant, client, clinical, Medicare, NDIS, diagnostic or other
+              sensitive information in this form. A general description of the workflow is enough for the fit call.
             </p>
           </motion.div>
 
@@ -579,7 +592,7 @@ function DiagnosticMethodSection() {
     ['4', 'Safe AI', 'Setting practical rules with human review']
   ];
 
-  const practiceTypes = ['GP', 'AH', 'SP'];
+  const providerTypes = ['AH', 'DS', 'SP'];
 
   return (
     <Section className="bg-surface-container-low overflow-hidden">
@@ -607,10 +620,10 @@ function DiagnosticMethodSection() {
               <div>
                 <p className="mb-xs font-label-md text-label-md font-bold">Clear service boundaries</p>
                 <p className="font-body-sm text-body-sm">
-                  Heutrix Labs provides workflow improvement, safe AI support, practice visibility builds and
+                  Heutrix Labs provides workflow improvement, safe AI support, operational visibility builds and
                   operational systems. We do <strong>NOT</strong> provide clinical advice, medical advice, legal advice,
                   financial advice, regulatory advice, official audit services, NDIS registration readiness, or
-                  compliance gap assessments.
+                  mock audits.
                 </p>
               </div>
             </div>
@@ -618,7 +631,7 @@ function DiagnosticMethodSection() {
 
           <motion.div variants={fadeUp} className="flex flex-col gap-md sm:flex-row sm:items-center">
             <div className="flex -space-x-3" aria-hidden="true">
-              {practiceTypes.map((label) => (
+              {providerTypes.map((label) => (
                 <span
                   key={label}
                   className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white bg-primary font-label-md text-label-md text-on-primary shadow-sm"
@@ -627,7 +640,7 @@ function DiagnosticMethodSection() {
                 </span>
               ))}
             </div>
-            <span className="font-label-md text-label-md text-on-surface-variant">Trusted by Australian Practices</span>
+            <span className="font-label-md text-label-md text-on-surface-variant">Built for Australian care-related providers</span>
           </motion.div>
         </motion.div>
 
@@ -670,13 +683,13 @@ function DashboardPreview() {
             <p className="font-headline-sm text-headline-sm text-primary">Work that needs attention</p>
           </div>
           <span className="rounded-[999px] bg-secondary-container px-md py-xs font-label-sm text-label-sm text-on-secondary-container">
-            Practice view
+            Provider view
           </span>
         </div>
         <div className="grid gap-md sm:grid-cols-3">
           {['Waiting', 'Overdue', 'Needs review'].map((label, index) => (
             <div key={label} className="rounded-lg border border-outline-variant bg-white p-md">
-              <p className="font-label-sm text-label-sm uppercase text-outline">{label}</p>
+              <p className="font-label-sm text-label-sm uppercase text-on-surface-variant">{label}</p>
               <p className="mt-xs font-display-lg text-[28px] leading-9 text-primary">{index + 2}</p>
             </div>
           ))}
@@ -728,12 +741,12 @@ function ServicesPage() {
   return (
     <>
       <PageHero
-        title="Practical workflow, dashboard and Safe AI support for health practices."
+        title="Practical workflow, dashboard and Safe AI support for care-related service providers."
         actions={<ButtonLink href={ctas.fitCall.href}>{ctas.fitCall.label}</ButtonLink>}
       >
         <p>
-          Heutrix Labs helps GP clinics, allied health practices and specialist providers improve the internal systems
-          that support daily operations.
+          Heutrix Labs helps allied health practices, disability support providers and specialist health providers
+          improve the internal systems that support daily operations.
         </p>
         <p>
           We focus on practical implementation: clearer workflows, less duplicated admin, better visibility, safer AI
@@ -754,6 +767,67 @@ function ServicesPage() {
         title="Not sure which service fits?"
         body="Start with a free fit call. We will discuss the workflow or operational issue and recommend a practical next step."
       />
+    </>
+  );
+}
+
+function AudiencePage({ content }) {
+  return (
+    <>
+      <PageHero title={content.title} actions={<ButtonLink href={ctas.fitCall.href}>{ctas.fitCall.label}</ButtonLink>}>
+        {content.intro.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </PageHero>
+
+      <Section className="bg-surface-container-low">
+        <div className="grid gap-xl lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <SectionIntro title={content.problemsTitle}>
+            <p>{content.problemsLead}</p>
+          </SectionIntro>
+          <div className="rounded-xl border border-outline-variant bg-white p-lg shadow-sm">
+            <BulletList items={content.problems} columns />
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="grid gap-xl lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <SectionIntro title={content.improvementsTitle}>
+            <p>
+              Heutrix Labs focuses on practical workflow support that can be used in day-to-day operations and handed
+              over clearly.
+            </p>
+          </SectionIntro>
+          <div className="rounded-xl border border-outline-variant bg-white p-lg shadow-sm">
+            <BulletList items={content.improvements} columns />
+          </div>
+        </div>
+      </Section>
+
+      <Section className="bg-surface-container-low">
+        <div className="grid gap-lg lg:grid-cols-3">
+          <InfoCard icon="sync_alt" title={content.exampleTitle} className="lg:col-span-2">
+            <p className="mb-sm">
+              <strong className="text-primary">Before:</strong> {content.exampleBefore}
+            </p>
+            <p>
+              <strong className="text-primary">After:</strong> {content.exampleAfter}
+            </p>
+          </InfoCard>
+          <InfoCard icon="start" title="Suitable starting points">
+            <BulletList items={content.startingPoints} />
+          </InfoCard>
+        </div>
+      </Section>
+
+      <Section>
+        <InfoCard icon="rule" title="Boundary note">
+          <p>{content.boundary}</p>
+        </InfoCard>
+      </Section>
+
+      <CtaSection title={content.finalTitle} body="" />
     </>
   );
 }
@@ -878,20 +952,20 @@ function SafeAiPage() {
   return (
     <>
       <PageHero
-        title="Safe AI Setup for health practices"
+        title="Safe AI Setup for care-related service providers."
         actions={<ButtonLink href={ctas.ai.href}>{ctas.ai.label}</ButtonLink>}
       >
         <p>
           AI can be useful for internal admin, drafting, workflow guidance and productivity support. It can also create
           privacy, quality and accountability risks if staff use it without clear rules.
         </p>
-        <p>Heutrix Labs helps practices set practical AI boundaries before AI becomes part of everyday admin work.</p>
+        <p>Heutrix Labs helps organisations set practical AI boundaries before AI becomes part of everyday admin work.</p>
       </PageHero>
 
       <Section className="bg-surface-container-low">
         <div className="grid gap-xl lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionIntro title="What Safe AI Setup helps with">
-            <p>Safe AI Setup helps your practice define clear internal rules before wider use.</p>
+            <p>Safe AI Setup helps your organisation define clear internal rules before wider use.</p>
           </SectionIntro>
           <div className="rounded-xl border border-outline-variant bg-white p-lg shadow-sm">
             <BulletList items={safeAiHelps} columns />
@@ -931,8 +1005,8 @@ function SafeAiPage() {
         <div className="grid gap-xl lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionIntro title="Privacy and sensitive information">
             <p>
-              Health practices must be careful with patient, participant, client, health, clinical, Medicare, diagnostic,
-              staff and other sensitive information.
+              Allied health practices and disability support providers must be careful with patient, participant,
+              client, health, clinical, Medicare, NDIS, diagnostic, staff and other sensitive information.
             </p>
             <p>
               Heutrix Labs does not recommend copying sensitive information into AI tools unless there is a documented,
@@ -963,16 +1037,16 @@ function AboutPage() {
           clearer and more reliable internal systems.
         </p>
         <p>
-          We work primarily with Australian GP clinics, allied health practices, specialist providers and
-          small-to-mid-sized healthcare operators.
+          We work primarily with Australian allied health practices, disability support providers, specialist health
+          providers and small-to-mid-sized care-related service operators.
         </p>
       </PageHero>
 
       <Section className="bg-surface-container-low">
         <SectionIntro title="Built for practical operators, not technology hype">
           <p>
-            Many practices do not need a large software project. They need clearer ownership, better tracking, fewer
-            duplicated steps, safer handovers and more reliable visibility over important work.
+            Many organisations do not need a large software project. They need clearer ownership, better tracking,
+            fewer duplicated steps, safer handovers and more reliable visibility over important work.
           </p>
           <p>
             Heutrix Labs focuses on practical implementation. We map how the work actually happens, identify what is
@@ -1061,7 +1135,7 @@ function FaqPage() {
 
       <CtaSection
         title="Have a workflow question not covered here?"
-        body="Use the contact form with a general description. Please do not include patient, participant, clinical, Medicare, diagnostic or sensitive information."
+        body="Use the contact form with a general description. Please do not include patient, participant, client, clinical, Medicare, NDIS, diagnostic or sensitive information."
       />
     </>
   );
@@ -1075,16 +1149,19 @@ function ContactPage({ search }) {
           Use this form to ask about workflow diagnostics, workflow automation, operations dashboards, tailored internal
           workflow systems or safe AI setup.
         </p>
-        <p>Please do not include patient, participant, clinical, Medicare, diagnostic or other sensitive information.</p>
+        <p>
+          Please do not include patient, participant, client, clinical, Medicare, NDIS, diagnostic or other sensitive
+          information in this form.
+        </p>
       </PageHero>
       <Section className="bg-surface-container-low">
         <div className="grid gap-xl lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div className="space-y-lg">
             <InfoCard icon="privacy_tip" title="Privacy note before you submit">
               <p>
-                Please do not include patient, participant, clinical, Medicare, diagnostic or other sensitive
-                information in this form. A general description of the workflow, admin issue or operational problem is
-                enough for an initial enquiry.
+                Please do not include patient, participant, client, clinical, Medicare, NDIS, diagnostic or other
+                sensitive information in this form. A general description of the workflow, admin issue or operational
+                problem is enough for an initial enquiry.
               </p>
             </InfoCard>
             <InfoCard icon="mail" title="Email">
@@ -1108,6 +1185,7 @@ function ContactForm({ search, submitLabel = 'Send enquiry' }) {
     if (service === 'operations-dashboard-build') return 'Operations Dashboard Build';
     if (service === 'safe-ai-setup') return 'Safe AI Setup';
     if (service === 'tailored-internal-workflow-system') return 'Tailored Internal Workflow System';
+    if (service === 'regulated-provider-workflow-tools') return 'Regulated Provider Workflow Tools';
     return 'Not sure yet';
   }, [search]);
   const defaultNext = new URLSearchParams(search).get('next') === 'workflow-checklist'
@@ -1125,8 +1203,8 @@ function ContactForm({ search, submitLabel = 'Send enquiry' }) {
         <h2 className="mb-md font-headline-md text-headline-md text-primary">Thank you for contacting Heutrix Labs.</h2>
         <p className="font-body-md text-body-md text-on-surface-variant">
           We have received your enquiry and will review whether it appears to be within scope. Please do not send
-          patient, participant, clinical, Medicare, diagnostic or other sensitive information unless a secure process has
-          been agreed.
+          patient, participant, client, clinical, Medicare, NDIS, diagnostic or other sensitive information unless a
+          secure process has been agreed.
         </p>
       </div>
     );
@@ -1143,8 +1221,8 @@ function ContactForm({ search, submitLabel = 'Send enquiry' }) {
       <div className="mb-lg rounded-lg border border-error/20 bg-error-container/35 p-md">
         <p className="mb-xs font-label-md text-label-md text-on-error-container">Sensitive information warning</p>
         <p className="font-body-sm text-body-sm text-on-surface-variant">
-          Do not include patient, participant, clinical, Medicare, diagnostic or other sensitive information. If the work
-          may involve sensitive information later, we will agree an appropriate process first.
+          Do not include patient, participant, client, clinical, Medicare, NDIS, diagnostic or other sensitive
+          information. If the work may involve sensitive information later, we will agree an appropriate process first.
         </p>
       </div>
 
@@ -1166,6 +1244,7 @@ function ContactForm({ search, submitLabel = 'Send enquiry' }) {
             'Operations Dashboard Build',
             'Safe AI Setup',
             'Tailored Internal Workflow System',
+            'Regulated Provider Workflow Tools',
             'Not sure yet'
           ]}
         />
@@ -1193,13 +1272,16 @@ function ContactForm({ search, submitLabel = 'Send enquiry' }) {
           name="message"
           required
           className="min-h-32 w-full resize-y rounded-lg border border-outline-variant bg-white p-md font-body-md text-body-md outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/30"
-          placeholder="Briefly describe the workflow, admin issue or operational problem. Please do not include patient, participant, clinical, Medicare, diagnostic or sensitive information."
+          placeholder="Briefly describe the workflow, admin issue or operational problem. Please do not include patient, participant, client, clinical, Medicare, NDIS, diagnostic or sensitive information."
         />
       </div>
 
       <label className="mt-md flex gap-md rounded-lg border border-outline-variant bg-surface-container-low p-md font-body-sm text-body-sm text-on-surface-variant">
         <input type="checkbox" required className="mt-xs h-4 w-4 shrink-0 accent-secondary" />
-        <span>I confirm I have not included patient, participant, clinical, Medicare, diagnostic or sensitive information.</span>
+        <span>
+          I confirm I have not included patient, participant, client, clinical, Medicare, NDIS, diagnostic or sensitive
+          information.
+        </span>
       </label>
 
       <button
@@ -1257,8 +1339,8 @@ function PrivacyPage() {
     <>
       <PageHero title="Privacy and data handling" compact>
         <p>
-          Heutrix Labs works with health practices and regulated service environments where privacy, confidentiality and
-          careful information handling matter.
+          Heutrix Labs works with care-related service providers where privacy, confidentiality and careful information
+          handling matter.
         </p>
         <p>
           Our approach is based on minimum necessary data use, clear access boundaries, secure file handling and
@@ -1367,8 +1449,8 @@ function DisclaimerPage() {
     <>
       <PageHero title="Website disclaimer" compact>
         <p>
-          Heutrix Labs provides practical workflow, automation, dashboard and safe AI support for health practices and
-          selected regulated service providers.
+          Heutrix Labs provides practical workflow, automation, dashboard and safe AI support for allied health
+          practices, disability support providers and selected regulated service providers.
         </p>
       </PageHero>
       <Section className="bg-surface-container-low">
